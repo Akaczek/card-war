@@ -1,5 +1,13 @@
+import Game from './game/Game/Game';
+import { AppContainer, Title } from './App.styles';
+
 const App = () => {
-  return <h1>Hello world</h1>;
+  return (
+    <AppContainer>
+      <Title>Card Wars</Title>
+      <Game />
+    </AppContainer>
+  );
 };
 
 export default App;
