@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import casinoBackground from './assets/casinotable.png';
+import { loadAssets, getCards } from './utils';
 
 export class Example extends Phaser.Scene {
   constructor() {
@@ -7,36 +7,53 @@ export class Example extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('bg', casinoBackground);
+    loadAssets(this);
   }
 
   create() {
     this.add.image(400, 300, 'bg');
-    this.add.rectangle(400, 450, 800, 5, 0xff0000);
-    const rect = this.add.rectangle(400, 475, 100, 100, 0x000000);
+    this.add.rectangle(400, 400, 800, 5, 0xff0000);
 
-    rect.setInteractive({ draggable: true });
+    const card_back = this.add.image(400, 100, 'card_back');
 
-    rect.on('pointerover', () => {
-      rect.setStrokeStyle(1, 0xffffff);
-    });
+    card_back.setInteractive({ draggable: true });
 
-    rect.on('pointerout', () => {
-      rect.setStrokeStyle(0, 0xffffff);
-    });
-
-    rect.on(
+    card_back.on(
       'drag',
       (_pointer: Phaser.Input.Pointer, dragX: number, dragY: number) => {
-        rect.x = dragX;
-        rect.y = dragY;
-
-        if (dragY < 450) {
-          rect.setFillStyle(0x555555);
-        } else {
-          rect.setFillStyle(0x000000);
-        }
+        card_back.x = dragX;
+        card_back.y = dragY;
       }
     );
+
+    card_back.on('dragstart', () => {
+      this.children.bringToTop(card_back);
+    });
+
+    const cardImages = getCards(this);
+
+    Phaser.Utils.Array.Shuffle(cardImages);
+
+    cardImages.forEach((card) => {
+      const cardImage = this.add.image(400, 475, card.suit, card.name);
+
+      cardImage.setInteractive({ draggable: true });
+
+      cardImage.on(
+        'drag',
+        (_pointer: Phaser.Input.Pointer, dragX: number, dragY: number) => {
+          if(dragX > 63 && dragX < 800 - 63) {
+            cardImage.x = dragX;
+          }
+          if(dragY > 75 && dragY < 525) {
+            cardImage.y = dragY;
+          }
+        }
+      );
+
+      cardImage.on('dragstart', () => {
+        this.children.bringToTop(cardImage);
+      });
+    });
   }
 }
