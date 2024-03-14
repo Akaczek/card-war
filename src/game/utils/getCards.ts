@@ -1,3 +1,5 @@
+import { RANKS_POWER } from './constants';
+
 export const getCards = (scene: Phaser.Scene) => {
   const cards_suits = [
     'club_cards',
@@ -12,6 +14,7 @@ export const getCards = (scene: Phaser.Scene) => {
       return {
         name: frameName,
         suit: suit,
+        power: RANKS_POWER.find((rank) => frameName.includes(rank.rank))?.power,
       };
     });
   }).flat();

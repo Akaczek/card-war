@@ -16,5 +16,10 @@ export const Title = styled.h1`
   font-size: 2rem;
   margin: 0;
   margin-bottom: 1rem;
-  padding: 0;
+  padding: 20px 0 10px 0;
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  height: 100%;
 `;

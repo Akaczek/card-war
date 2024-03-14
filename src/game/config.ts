@@ -1,9 +1,10 @@
 import { Example } from './scene';
+import { GAME_HEIGHT, GAME_WIDTH } from './utils/constants';
 
 export const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: GAME_WIDTH,
+  height: GAME_HEIGHT,
   scene: Example,
   parent: 'phaser-container',
   physics: {
