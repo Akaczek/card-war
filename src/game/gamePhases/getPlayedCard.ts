@@ -1,3 +1,5 @@
+import { raiseCard, lowerCard } from '../utils/raiseLowerCard';
+
 export const getPlayedCard = (
   scene: Phaser.Scene,
   which: 'myPlayedCard' | 'opponentPlayedCard',
@@ -12,7 +14,19 @@ export const getPlayedCard = (
   if (card) {
     card.destroy();
   }
-  const cardInfo = arrayToShift.shift();
+
+  let cardInfo;
+
+  if (scene.data.get('isRaiseMine') && which === 'myPlayedCard') {
+    cardInfo = raiseCard(arrayToShift.shift());
+    scene.data.set('isRaiseMine', false);
+  } else if (scene.data.get('isLowerOpponents') && which === 'opponentPlayedCard') {
+    cardInfo = lowerCard(arrayToShift.shift());
+    scene.data.set('isLowerOpponents', false);
+  } else {
+    cardInfo = arrayToShift.shift();
+  }
+    
   if (cardInfo) {
     scene.data.set(
       which,

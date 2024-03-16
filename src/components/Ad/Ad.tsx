@@ -1,12 +1,11 @@
 import { FC } from 'react';
 
 import { AdWrapper, AdImg } from './Ad.styles';
-import ad from '../../assets/ad.png';
 
-const Ad: FC = () => {
+const Ad: FC<{img: string}> = ({img}) => {
   return (
     <AdWrapper>
-      <AdImg src={ad} alt='ad'/>
+      <AdImg src={img} alt='ad'/>
     </AdWrapper>
   );
 };
