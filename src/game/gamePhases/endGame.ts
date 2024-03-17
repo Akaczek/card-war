@@ -14,8 +14,14 @@ export const endGame = (scene: Phaser.Scene, endText: string) => {
       color: '#ffffff',
     })
     .setOrigin();
+  scene.add
+    .text(400, 400, 'Congratulations! Here is your discount code: XYgf324', {
+      fontSize: '32px',
+      color: '#ffffff',
+    })
+    .setOrigin();
   const pageLink = scene.add
-    .text(400, 400, 'Click me to go to our site', {
+    .text(400, 450, 'Click me to go to our site', {
       fontSize: '32px',
       color: '#ffffff',
     })
