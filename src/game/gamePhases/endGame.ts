@@ -21,7 +21,7 @@ export const endGame = (scene: Phaser.Scene, endText: string) => {
     })
     .setOrigin();
   scene.add
-    .text(400, 400, 'Here is your discount code: XYgf324', {
+    .text(400, 450, 'Here is your discount code: XYgf324', {
       fontSize: '32px',
       color: '#ffffff',
     })
